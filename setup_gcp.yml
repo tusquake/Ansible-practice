@@ -1,0 +1,17 @@
+---
+- name: Configure All GCP Webservers
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install Nginx Web Server
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Ensure Nginx is running and enabled on boot
+      service:
+        name: nginx
+        state: started
+        enabled: yes
